@@ -25,15 +25,9 @@ class App extends React.Component {
       text:'',
       score:0,
       asteroidCount: 1,
-      inGame: false
-    }
-    this.spaceship = [];
-    // problem is with the hard coding, I need to be  carrying values
-    // cant just thing of these  as one object being moved but rather an object object being drawn at certain times
-    // Also I am having trouble whenever I  do setState I rerender all componennts but thats not REACTive I should be able to refresh
-    // only certain components which is not happening currently with how im setting it all up
-    // im not using the .layer, I for some reason cant understand any of these fucking docs
-    this.asteroids = [
+      inGame: false,
+      counter: 0,
+      asteroids: [
       {
           x: 200,
           y: 200
@@ -52,8 +46,17 @@ class App extends React.Component {
         x: 400,
         y: 360
       }
-    ];
+    ]
+    }
+    this.spaceship = [];
+    // problem is with the hard coding, I need to be  carrying values
+    // cant just thing of these  as one object being moved but rather an object object being drawn at certain times
+    // Also I am having trouble whenever I  do setState I rerender all componennts but thats not REACTive I should be able to refresh
+    // only certain components which is not happening currently with how im setting it all up
+    // im not using the .layer, I for some reason cant understand any of these fucking docs
+    
     this.bullets = [];
+
     
   }
   
@@ -67,81 +70,51 @@ class App extends React.Component {
     this.setState({
       keys
     });
+    // this.keys.cache();
     console.log(asteroids);
   }
   
 
-  // componentDidMount() {
-  //   let angularSpeed = 90;
-  //   this.anim = new Konva.Animation(frame => {
-  //     let angleDiff = (frame.timeDiff * angularSpeed) / 1000;
-  //     this.asteroids.rotate(angleDiff);
-  //   }, this.asteroids.getLayer());
-  //   this.anim.start();
-  // }
-
   componentDidMount() {
   // const DELTA = 4;
+
     window.addEventListener('keyup', this.handleKeyPress.bind(this, false));
     window.addEventListener('keydown', this.handleKeyPress.bind(this, true));
-    let tween = new Konva.Tween({
-      node: rect,
-      duration: 1,
-      x: 140,
-      y: 90,
-      fill: 'red',
-      rotation: Math.PI * 180,
-      opacity: 1,
-      strokeWidth: 6,
-      scaleX: 1.5
+
+
+    this.loop = requestAnimationFrame(this._doAnimation)
+
+
+      // doesnt look like I can cache correctly in app, so will need to cache in the comp itself and pull it in 
+      // this.asteroids.cache
+  }
+
+  _doAnimation = () => {
+    const newAsteroids = this.state.asteroids.map(coords => {
+      return {
+        x: coords.x + 1,
+        y: coords.y + 1
+      };
     });
-
-    // start tween after 2 seconds
-    setTimeout(function() {
-      tween.play();
-    }, 2000);
-    this.loop = requestAnimationFrame(() => {
-    // modify the x and y of each asteroid
-      
-      // const newShip = this.spaceship; 
-
-      const newAsteroids = this.asteroids.map(coords => {
-        return {
-          x: coords.x + 1,
-          y: coords.y + 1
-        };
-      });
-      this.setState({
-        asteroids: newAsteroids
-      });
+    this.setState({
+      asteroids: newAsteroids,
+      counter: this.state.counter + 1
+    }, ()=> {
+      requestAnimationFrame(this._doAnimation);
     });
   }
 
   componentWillUnmount() {
     window.removeEventListener('keyup', this.handleKeys);
     window.removeEventListener('keydown', this.handleKeys);
+    // this.asteroids.cache();
+    // this.spaceship.cache();
     // window.removeEventListener('resize', this.handleResize);
   }
 
-
-
-    // startGame() {
-    //   this.setState({
-    //     inGame: true,
-    //     score: 0
-    //   });
-    //   let spaceship = new Spaceship({
-    //     position: {
-    //       x: this.state.screen.width/2,
-    //       y: this.state.screen.height/2
-    //     },
-    //   });
-    // }
-    
-    
   
   render() {
-    let asteroids = this.asteroids.map(coords => {
+    let asteroids = this.state.asteroids.map(coords => {
       return <Asteroids x={coords.x} y={coords.y} ref={node => {
         this.asteroid = node;
     }}/>
@@ -153,7 +126,7 @@ class App extends React.Component {
       }}>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          {/* <Text text='Welcome To Asteroids!' x={100} y={150} fontSize={30} fontFamily='Calibri' fill='green' color='white' /> */}
+          <Text text={`this is the counter ${this.state.counter}`} x={100} y={150} fontSize={30} fontFamily='Calibri' fill='green' color='white' />
           {asteroids}
         </Layer>
       </Stage>
@@ -184,3 +157,45 @@ export default App;
   //     e.preventDefault();
   //     window.batchDraw();
   //   })
+
+
+
+    // componentDidMount() {
+  //   let angularSpeed = 90;
+  //   this.anim = new Konva.Animation(frame => {
+  //     let angleDiff = (frame.timeDiff * angularSpeed) / 1000;
+  //     this.asteroids.rotate(angleDiff);
+  //   }, this.asteroids.getLayer());
+  //   this.anim.start();
+  // }
+
+     // startGame() {
+    //   this.setState({
+    //     inGame: true,
+    //     score: 0
+    //   });
+    //   let spaceship = new Spaceship({
+    //     position: {
+    //       x: this.state.screen.width/2,
+    //       y: this.state.screen.height/2
+    //     },
+    //   });
+    // }
+
+
+        // let tween = new Konva.Tween({
+    //   node: rect,
+    //   duration: 1,
+    //   x: 140,
+    //   y: 90,
+    //   fill: 'red',
+    //   rotation: Math.PI * 180,
+    //   opacity: 1,
+    //   strokeWidth: 6,
+    //   scaleX: 1.5
+    // });
+
+        // // start tween after 2 seconds
+    // setTimeout(function() {
+    //   tween.play();
+    // }, 2000);
