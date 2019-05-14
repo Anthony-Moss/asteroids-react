@@ -14,7 +14,7 @@ class Bullets extends React.Component {
     render() {
         return <Circle 
                     x={400}
-                    y={795}
+                    y={590}
                     radius={3}
                     fill="green"
                 />

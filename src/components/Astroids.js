@@ -5,27 +5,18 @@ import { Line, RegularPolygon, Layer } from 'react-konva';
 class Astroids extends React.Component {
     constructor(props) {
         super(props);
+        console.log(`props are ${props}`);
         this.state={
-            astroids: []
+            asteroids: [
+                {
+                    x: props.x,
+                    y: props.y
+                },
+            ]
         }
+        console.log(`x is ${this.props.x}`);
+        console.log(`state is ${this.state.asteroids[0].x}`);
     }
-    addAsteroid = () => {
-        const {innerWidth, innerHeight} = window;
-        const newAsteroid = <RegularPolygon ref={node => {
-            this.RegularPolygon = node;
-        }}
-        x={100}
-        y={100}
-        sides={6}
-        radius={30}
-        fill='red'
-        stroke='grey'
-        strokeWidth={2}
-        />
-        // layer.add(newAsteroid);
-        };
-    
-
         
     render () {
         function getSides() {
@@ -42,13 +33,17 @@ class Astroids extends React.Component {
         }
         let numOfSides = getSides();
         let radiusSize = getRadius();
+
+        // console.log(asteroids);
         // console.log(numOfSides);
         // console.log(radiusSize);
+        // console.log(`state is ${this.state}`)
         return (
+        
             <RegularPolygon 
-            x={100}
-            y={100}
-            sides={numOfSides}
+            x={this.state.asteroids[0].x}
+            y={this.state.asteroids[0].y}
+            sides={numOfSides} 
             radius={radiusSize}
             fill='#282c34'
             stroke='grey'
@@ -80,3 +75,20 @@ export default Astroids;
         //         duration: 1.0
         //         });
         //     }
+
+
+            // addAsteroid = () => {
+    //     const {innerWidth, innerHeight} = window;
+    //     const newAsteroid = <RegularPolygon ref={node => {
+    //         this.RegularPolygon = node;
+    //     }}
+    //     x={100}
+    //     y={100}
+    //     sides={6}
+    //     radius={30}
+    //     fill='red'
+    //     stroke='grey'
+    //     strokeWidth={2}
+    //     />
+    //     // layer.add(newAsteroid);
+    //     };
