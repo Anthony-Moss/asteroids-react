@@ -18,43 +18,71 @@ class Astroids extends React.Component {
             let radius = Math.floor(Math.random() * (max - min + 1) + min);
             return radius
         }
+        function getSpeed() {
+            let min = 1;
+            let max = 8;
+            let radius = Math.floor(Math.random() * (max - min + 1) + min);
+            return radius
+        }
+        function getCycle() {
+            let min = 33;
+            let max = 66;
+            let radius = Math.floor(Math.random() * (max - min + 1) + min);
+            return radius
+        }
 
         this.state={
             numOfSides: getSides(),
             radiusSize: getRadius(),
-            
                     x: 50,
-                    y: 50
+                    y: 50,
+            speed: getSpeed(),
+            cycle: getCycle()
         }
     }
     
 static getDerivedStateFromProps(props, state){
         let counter = props.counter
         // console.log(counter);
+        let width = props.width
+        let height = props.height
+        console.log(width)
         let directions = {
         0: {
-            x: state.x + 1,
-            y: state.y + 1
+            x: state.x + state.speed,
+            y: state.y + state.speed
             },
         1: {
-            x: state.x - 1,
-            y: state.y + 1
+            x: state.x - state.speed,
+            y: state.y + state.speed
         },
         2: {
-            x: state.x + 1,
-            y: state.y - 1
+            x: state.x + state.speed,
+            y: state.y - state.speed
         },
         3: {
-            x: state.x - 1,
-            y: state.y - 1
+            x: state.x - state.speed,
+            y: state.y - state.speed
         }
     }
-    
-    if (counter <= 50) {
+    // handle the width bounds
+    if(state.x > width){
+        return state.x = 0 + state.speed;
+    } else if(state.x < 0) {
+        return state.x = width;
+    }
+    // handle the height bounds
+    if(state.y > height) {
+        return state.y = 0 + state.speed;
+    } else if(state.y < 0) {
+        return state.y = height;
+    }
+
+    if (counter <= state.cycle) {
         return directions[0]
-    } else if (counter >50 && counter <100){
+    } else if (counter >state.cycle && counter <state.cycle*2){
       return directions[1]
-    } else if (counter > 100 && counter < 150){
+    } else if (counter > state.cycle*2 && counter < state.cycle*3){
       return directions[2]
     } else {
       return directions[3]

@@ -29,9 +29,13 @@ class App extends React.Component {
       counter: 0,
       asteroids: [
       {
-          x: 200,
-          y: 200
-      }
+      },
+      // {
+
+      // },
+      // {
+
+      // },
     ]
     }
     this.spaceship = [];
@@ -90,8 +94,8 @@ class App extends React.Component {
 
   
   render() {
-    let asteroids = this.state.asteroids.map(coords => {
-      return <Asteroids counter={this.state.counter} ref={node => {
+    let asteroids = this.state.asteroids.map(asteroid => {
+      return <Asteroids counter={this.state.counter} width={this.state.screen.width} height={this.state.screen.height} ref={node => {
         this.asteroid = node;
     }}/>
     })
