@@ -31,20 +31,6 @@ class App extends React.Component {
       {
           x: 200,
           y: 200
-          // sides,
-          // radius,
-          // fill,
-          // stroke,
-          // strokeWidth,
-          // ref
-      },
-      {
-        x: 350,
-        y: 300
-      },
-      {
-        x: 400,
-        y: 360
       }
     ]
     }
@@ -71,7 +57,7 @@ class App extends React.Component {
       keys
     });
     // this.keys.cache();
-    console.log(asteroids);
+    // console.log(asteroids);
   }
   
 
@@ -80,49 +66,39 @@ class App extends React.Component {
 
     window.addEventListener('keyup', this.handleKeyPress.bind(this, false));
     window.addEventListener('keydown', this.handleKeyPress.bind(this, true));
-
-
     this.loop = requestAnimationFrame(this._doAnimation)
-
-
-      // doesnt look like I can cache correctly in app, so will need to cache in the comp itself and pull it in 
-      // this.asteroids.cache
   }
 
   _doAnimation = () => {
-    const newAsteroids = this.state.asteroids.map(coords => {
-      return {
-        x: coords.x + 1,
-        y: coords.y + 1
-      };
-    });
+    let newCounter = this.state.counter + 1;
+     if (newCounter > 200) {
+       newCounter = 0;
+     }
     this.setState({
-      asteroids: newAsteroids,
-      counter: this.state.counter + 1
+      // asteroids: newAsteroids,
+      counter: newCounter
     }, ()=> {
       requestAnimationFrame(this._doAnimation);
     });
   }
+  
 
   componentWillUnmount() {
     window.removeEventListener('keyup', this.handleKeys);
     window.removeEventListener('keydown', this.handleKeys);
-    // this.asteroids.cache();
-    // this.spaceship.cache();
-    // window.removeEventListener('resize', this.handleResize);
   }
 
   
   render() {
     let asteroids = this.state.asteroids.map(coords => {
-      return <Asteroids x={coords.x} y={coords.y} ref={node => {
+      return <Asteroids counter={this.state.counter} ref={node => {
         this.asteroid = node;
     }}/>
     })
-    console.log(asteroids);
+    // console.log(asteroids);
     return (
       <div tabIndex='0' onKeyDown={(event) => {
-        console.log(event.key)
+        // console.log(event.key)
       }}>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
