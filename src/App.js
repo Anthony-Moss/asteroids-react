@@ -51,7 +51,7 @@ class App extends React.Component {
     // if asteroid.x = spaceship.x && asteroid.y = spaceship.y 
     // spaceship object is removed or game ends
     // same for bullets and asteroids except if collision asteroid and bullet disapear
-  }
+  
   
   handleKeyPress(value, e) {
     let keys = this.state.keys;
