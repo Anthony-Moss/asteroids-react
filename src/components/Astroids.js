@@ -48,7 +48,7 @@ class Astroids extends React.Component {
             return newY
         }
 
-        // I can probably just use this one function here 
+        // I can probably just use this one function here or probably 2, one for whole one for floats
         function getRandomNum(max, min) {
             let number = Math.floor(Math.random() * (max - min + 1) + min);
         }

@@ -79,12 +79,28 @@ class Spaceship extends React.Component {
                 }
             }; 
         }
+//          can I import bullets class into spaceship and then create new bullets?
+        // if (keyValue.space) {
+        //     let x = state.x;
+        //     let y = state.y;
+        //     // create bullet at x,y
+        //     let newBullet = new Konva.Tween({
+        //         node: bullet,
+        //         duration: 5,
+        //         x: x,
+        //         y: y,
+        //         fill: 'red',
+        //         rotation: Math.PI * 180,
+        //         opacity: 1,
+        //         strokeWidth: 6,
+        //         scaleX: 1.5
+        //         });
 
-        if (keyValue.space) {
-            let x = state.x;
-            let y = state.y;
-            // create bullet at x,y
-        }
+        //             // start tween after 2 seconds
+        //         setTimeout(function() {
+        //         newBullet.play();
+        //         }, 2000);
+        //     }
     }
     
         changeColor = () => {

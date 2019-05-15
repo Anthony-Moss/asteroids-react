@@ -22,7 +22,7 @@ class App extends React.Component {
         down: 0,
         space: 0
       },
-      text:'',
+      text:'Move with WAD or Arrows\nClick anywhere to play!',
       score:0,      // for this depending on how far I get, this will go up per asteroid killed, just increase it in state by 10 or easier this would be like a counter and thats my score
       asteroidCount: 1,
       inGame: false,
@@ -76,19 +76,32 @@ class App extends React.Component {
       bullets: [{}]
     });
   }
-  
+
+
 
   componentDidMount() {
     console.log(this.state.asteroids)
+    // window.addEventListener('mousedown', this.handleClick.bind(this, false));
     window.addEventListener('keyup', this.handleKeyPress.bind(this, false));
     window.addEventListener('keydown', this.handleKeyPress.bind(this, true));
     this.loop = requestAnimationFrame(this._doAnimation);
+    
+
     // this.bullet = requestAnimationFrame(this._createBullet)
   }
+
+  // componentDidUpdate() {
+  //   if (this.state.inGame) {
+  //     this.loop = requestAnimationFrame(this._doAnimation);
+  //   }
+  // }
+
+
+
   _doAnimation = () => {
     let newCounter = this.state.counter + 1;
     let newAsteroidCounter = this.state.counter + 1;
-    console.log(newAsteroidCounter);
+    // console.log(newAsteroidCounter);
     let anAsteroid = [{}];
     let newAsteroids = this.state.asteroids;
 
@@ -122,7 +135,15 @@ class App extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keyup', this.handleKeys);
     window.removeEventListener('keydown', this.handleKeys);
+    // window.removeEventListener('mousedown', this.handleClick);
   }
+
+  // startGame = () => {
+  //       this.setState({
+  //           inGame: true,
+            // text: ''
+  //       }, this.componentDidUpdate())
+  //   }
 
   
   render() {
@@ -143,9 +164,10 @@ class App extends React.Component {
       <div tabIndex='0' onKeyDown={(event) => {
         // console.log(event.key)
       }}>
-      <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Stage width={window.innerWidth} height={window.innerHeight} onClick={this.startGame}>
         <Layer>
-          <Text text={`this is the counter ${this.state.counter}`} x={100} y={150} fontSize={30} fontFamily='Calibri' fill='green' color='white' />
+          {/* <Text text={`this is the counter ${this.state.counter}`} x={100} y={150} fontSize={30} fontFamily='Calibri' fill='green' color='white' /> */}
+          <Text text={`${this.state.text}`} x={this.state.width/2} y={this.state.height/2} fontSize={30} fontFamily='Calibri' fill='green' color='white' />
           {asteroids}
           {spaceship}
         </Layer>
@@ -158,14 +180,6 @@ class App extends React.Component {
 
 export default App;
 
-    // componentDidMount() {
-  //   let angularSpeed = 90;
-  //   this.anim = new Konva.Animation(frame => {
-  //     let angleDiff = (frame.timeDiff * angularSpeed) / 1000;
-  //     this.asteroids.rotate(angleDiff);
-  //   }, this.asteroids.getLayer());
-  //   this.anim.start();
-  // }
 
      // startGame() {
     //   this.setState({
