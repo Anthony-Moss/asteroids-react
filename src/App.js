@@ -1,6 +1,6 @@
 import React from 'react';
 import Konva from 'konva';
-import { Stage, Layer, Text, Animation } from 'react-konva';
+import { Stage, Layer, Text, Animation, Wedge } from 'react-konva';
 import Spaceship from './components/Spaceship';
 import Asteroids from './components/Astroids';
 import Bullets from './components/Bullets';
@@ -36,22 +36,18 @@ class App extends React.Component {
       // {
 
       // },
-    ]
+    ],
+    spaceship: [
+      {
+      },
+    ],
+    bullets: []
     }
-    this.spaceship = [];
-    // problem is with the hard coding, I need to be  carrying values
-    // cant just thing of these  as one object being moved but rather an object object being drawn at certain times
-    // Also I am having trouble whenever I  do setState I rerender all componennts but thats not REACTive I should be able to refresh
-    // only certain components which is not happening currently with how im setting it all up
-    // im not using the .layer, I for some reason cant understand any of these fucking docs
-    
-    this.bullets = [];
-
-    
   }
   
   handleKeyPress(value, e) {
-    let asteroids = this.asteroids;
+    // let asteroids = this.asteroids;
+    // let spaceship = this.spaceship;
     let keys = this.state.keys;
     if (e.keyCode === 37 || e.keyCode === 65) keys.left  = value;
     if(e.keyCode === 39 || e.keyCode === 68) keys.right = value;
@@ -60,14 +56,10 @@ class App extends React.Component {
     this.setState({
       keys
     });
-    // this.keys.cache();
-    // console.log(asteroids);
   }
   
 
   componentDidMount() {
-  // const DELTA = 4;
-
     window.addEventListener('keyup', this.handleKeyPress.bind(this, false));
     window.addEventListener('keydown', this.handleKeyPress.bind(this, true));
     this.loop = requestAnimationFrame(this._doAnimation)
@@ -79,7 +71,6 @@ class App extends React.Component {
        newCounter = 0;
      }
     this.setState({
-      // asteroids: newAsteroids,
       counter: newCounter
     }, ()=> {
       requestAnimationFrame(this._doAnimation);
@@ -98,7 +89,12 @@ class App extends React.Component {
       return <Asteroids counter={this.state.counter} width={this.state.screen.width} height={this.state.screen.height} ref={node => {
         this.asteroid = node;
     }}/>
-    })
+    });
+    let spaceship = this.state.spaceship.map(spaceship => {
+      return <Spaceship rotation={65} counter={this.state.counter} width={this.state.screen.width} height={this.state.screen.height} keyPress={this.state.keys} ref={node => {
+        this.spaceship = node;
+      }}/>
+    });
     // console.log(asteroids);
     return (
       <div tabIndex='0' onKeyDown={(event) => {
@@ -108,6 +104,7 @@ class App extends React.Component {
         <Layer>
           <Text text={`this is the counter ${this.state.counter}`} x={100} y={150} fontSize={30} fontFamily='Calibri' fill='green' color='white' />
           {asteroids}
+          {spaceship}
         </Layer>
       </Stage>
       </div>

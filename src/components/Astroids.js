@@ -34,8 +34,8 @@ class Astroids extends React.Component {
         this.state={
             numOfSides: getSides(),
             radiusSize: getRadius(),
-                    x: 50,
-                    y: 50,
+            x: 50,
+            y: 50,
             speed: getSpeed(),
             cycle: getCycle()
         }
@@ -46,7 +46,7 @@ static getDerivedStateFromProps(props, state){
         // console.log(counter);
         let width = props.width
         let height = props.height
-        console.log(width)
+        // console.log(width)
         let directions = {
         0: {
             x: state.x + state.speed,
@@ -81,11 +81,11 @@ static getDerivedStateFromProps(props, state){
     if (counter <= state.cycle) {
         return directions[0]
     } else if (counter >state.cycle && counter <state.cycle*2){
-      return directions[1]
+        return directions[1]
     } else if (counter > state.cycle*2 && counter < state.cycle*3){
-      return directions[2]
+        return directions[2]
     } else {
-      return directions[3]
+        return directions[3]
     }
     }   
         
