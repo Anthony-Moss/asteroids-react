@@ -113,36 +113,3 @@ static getDerivedStateFromProps(props, state){
 }
 
 export default Astroids;
-
-
-
-
-
-        // addAsteroid = () => {
-        //     const {innerWidth, innerHeight} = window;
-        //     for (let i = 0; i < 10; i ++) {
-        //         const j = Math.round(Math.random())
-        //         const newRect = <rect ref={node => {
-        //         node.to({
-        //         x: innerWidth/2,
-        //         y: innerHeight/2,
-        //         duration: 1.0
-        //         });
-        //     }
-
-
-            // addAsteroid = () => {
-    //     const {innerWidth, innerHeight} = window;
-    //     const newAsteroid = <RegularPolygon ref={node => {
-    //         this.RegularPolygon = node;
-    //     }}
-    //     x={100}
-    //     y={100}
-    //     sides={6}
-    //     radius={30}
-    //     fill='red'
-    //     stroke='grey'
-    //     strokeWidth={2}
-    //     />
-    //     // layer.add(newAsteroid);
-    //     };

@@ -44,10 +44,16 @@ class App extends React.Component {
     bullets: []
     }
   }
+
+  // not sure exactly where to put it but I think for collision unless I can find an easier baked in method I should do something like 
+  // detectCollision = () => {
+    // map spaceship bullets and asteroids into arrays to get all coords
+    // if asteroid.x = spaceship.x && asteroid.y = spaceship.y 
+    // spaceship object is removed or game ends
+    // same for bullets and asteroids except if collision asteroid and bullet disapear
+  }
   
   handleKeyPress(value, e) {
-    // let asteroids = this.asteroids;
-    // let spaceship = this.spaceship;
     let keys = this.state.keys;
     if (e.keyCode === 37 || e.keyCode === 65) keys.left  = value;
     if(e.keyCode === 39 || e.keyCode === 68) keys.right = value;
@@ -87,7 +93,7 @@ class App extends React.Component {
   render() {
     let asteroids = this.state.asteroids.map(asteroid => {
       return <Asteroids counter={this.state.counter} width={this.state.screen.width} height={this.state.screen.height} ref={node => {
-        this.asteroid = node;
+        this.asteroid = node; // ask chris tomorrow if i get far enough what ref is doing, can I use that for collision if thats setting a layer?
     }}/>
     });
     let spaceship = this.state.spaceship.map(spaceship => {
@@ -114,28 +120,6 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-
-  // window.addEventListener('keydown', (e) => {
-  //   let keys = this.state.keys;
-  //     if(e.keyCode === 37) {
-  //       keys.left = value;
-  //     } else if (e.keyCode === 38) {
-  //       keys.right = value;
-  //     } else if (e.keyCode === 39) {
-  //       keys.up = value;
-  //     } else if (e.keyCode === 40) {
-  //       keys.space = value;
-  //     } else {
-  //       return;
-  //     }
-  //     e.preventDefault();
-  //     window.batchDraw();
-  //   })
-
-
 
     // componentDidMount() {
   //   let angularSpeed = 90;

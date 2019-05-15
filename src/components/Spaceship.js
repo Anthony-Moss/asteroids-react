@@ -17,16 +17,11 @@ class Spaceship extends React.Component {
             angle: 50,
             rotation: 65,
             speed: 4,
-            keys: props.keyPress,
+            keys: props.keyPress
 
         }
     }
     
-    // state={
-    //     x:200,
-    //     y:400,
-    //     color: 'purple'
-    // };
     static getDerivedStateFromProps(props, state) {
         let counter = props.counter;
         let width = props.width;
@@ -39,12 +34,14 @@ class Spaceship extends React.Component {
         } else if(state.x < 0) {
             return {x: width}
         };
+
         // handle the height bounds
         if(state.y > height) {
             return {y: 0};
         } else if(state.y < 0) {
             return {y: height};
         }
+
         // if (state.rotation < 180 && state.rotation > -180) {
             if (keyValue.left) {
                 let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
@@ -62,8 +59,8 @@ class Spaceship extends React.Component {
             if (keyValue.up) {
             return {rotation: rotation + 5, x: x, y: y}
             } else {
-            return {rotation: rotation + 5}
-        }
+                return {rotation: rotation + 5}
+            }
         }
         
         // console.log(keyValue.up);
@@ -76,40 +73,22 @@ class Spaceship extends React.Component {
             } else {
                 let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
                 let y = state.y - Math.cos(-(state.rotation - 65)*Math.PI/180) * state.speed;
-            return {
-                x,
-                y
+                return {
+                    x,
+                    y
                 }
             }; 
         }
     }
     
-
-        // console.log(state.x)
-
-        // rotateShip = () => {}
-    
-        handleClick = () => {
+        changeColor = () => {
         this.setState({
             fill: Konva.Util.getRandomColor()
         }, () => {
-            this.wedge.cache();
+            this.fill.cache();
         })
     }
     
-// handle the width bounds
-    // if(state.x > width){
-    //     return state.x = 0 + state.speed;
-    // } else if(state.x < 0) {
-    //     return state.x = width;
-    // }
-    // // handle the height bounds
-    // if(state.y > height) {
-    //     return state.y = 0 + state.speed;
-    // } else if(state.y < 0) {
-    //     return state.y = height;
-    // }
-
     render() {
         // console.log(this.state.y);
         return (
@@ -125,7 +104,7 @@ class Spaceship extends React.Component {
             ref={node => {
                 this.wedge = node;
             }}
-            onClick={this.handleClick}
+            onClick={this.changeColor}
             />
         )
     }
