@@ -11,7 +11,7 @@ class Spaceship extends React.Component {
             x: 200,
             y: 200,
             radius: 30,
-            fill: 'purple',
+            fill: 'orange',
             stroke: 'grey',
             strokeWidth: 1,
             angle: 50,
@@ -79,13 +79,19 @@ class Spaceship extends React.Component {
                 }
             }; 
         }
+
+        if (keyValue.space) {
+            let x = state.x;
+            let y = state.y;
+            // create bullet at x,y
+        }
     }
     
         changeColor = () => {
         this.setState({
             fill: Konva.Util.getRandomColor()
         }, () => {
-            this.fill.cache();
+            this.wedge.cache();
         })
     }
     
@@ -101,6 +107,8 @@ class Spaceship extends React.Component {
             strokeWidth={1}
             angle={this.state.angle}
             rotation={this.state.rotation}
+            shadowColor= {'yellow'}
+            shadowBlur={7}
             ref={node => {
                 this.wedge = node;
             }}

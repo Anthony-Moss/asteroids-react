@@ -10,18 +10,29 @@ class Bullets extends React.Component {
         this.state={
             x: 0,
             y: 0,
-            radius: 2 
+            radius: 3,
+            fill: 'green',
+            shadowColor: 'black',
+            shadowBlur: 10,
+            shadowOffset: {
+            x: 5,
+            y: 5
+          },
+          shadowOpacity: 0.6, 
         }
     }
 
     render() {
         return <Circle 
-                    x={400}
+                    x={250}
                     y={590}
                     radius={3}
-                    fill="green"
+                    fill={'green'}
+                    shadowColor= {'white'}
+                    shadowBlur={10}
                 />
     }
 }
+
 
 export default Bullets;
