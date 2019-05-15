@@ -1,6 +1,6 @@
 import React from 'react';
 import Konva from 'konva';
-import { Stage, Layer, Text, Animation, Wedge } from 'react-konva';
+import { Stage, Layer, Text } from 'react-konva';
 import Spaceship from './components/Spaceship';
 import Asteroids from './components/Astroids';
 import Bullets from './components/Bullets';
@@ -31,11 +31,10 @@ class App extends React.Component {
       {
       },
       {
-
       },
-      // {
+      {
 
-      // },
+      }
     ],
     // because ill forget, spaceships is made as array of objects on purpose, its for lives
     // so dont just remove because it doesnt make sense 
@@ -46,6 +45,18 @@ class App extends React.Component {
     bullets: [
       {
       },
+    ],
+    stars: [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
     ]
     }
   }
@@ -100,16 +111,17 @@ class App extends React.Component {
 
   _doAnimation = () => {
     let newCounter = this.state.counter + 1;
-    let newAsteroidCounter = this.state.counter + 1;
+    // let newAsteroidCounter = this.state.counter + 1;
     // console.log(newAsteroidCounter);
     let anAsteroid = [{}];
     let newAsteroids = this.state.asteroids;
+    if (newCounter === 300) {
+      newAsteroids.push({});
+    }
 
-     if (newCounter > 200) {
+     if (newCounter > 500) {
         newCounter = 0;
-        newAsteroids.push({});
-     }
-     if (newAsteroidCounter > 600) {
+        
      }
     this.setState({
       counter: newCounter,

@@ -16,14 +16,14 @@ class Spaceship extends React.Component {
             strokeWidth: 1,
             angle: 50,
             rotation: 65,
-            speed: 4,
+            speed: 5,
             keys: props.keyPress
 
         }
     }
     
     static getDerivedStateFromProps(props, state) {
-        let counter = props.counter;
+        // let counter = props.counter;
         let width = props.width;
         let height = props.height;
         let keyValue = props.keyPress;
@@ -47,9 +47,9 @@ class Spaceship extends React.Component {
                 let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
                 let y = state.y - Math.cos(-(state.rotation - 65)*Math.PI/180) * state.speed;
                 if (keyValue.up) {
-                    return {rotation: rotation - 5, x: x, y: y}
+                    return {rotation: rotation - 6, x: x, y: y}
             } else {
-                return {rotation: rotation - 5}
+                return {rotation: rotation - 6}
             }
         }
          
@@ -57,9 +57,9 @@ class Spaceship extends React.Component {
             let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
             let y = state.y - Math.cos(-(state.rotation - 65)*Math.PI/180) * state.speed;
             if (keyValue.up) {
-            return {rotation: rotation + 5, x: x, y: y}
+            return {rotation: rotation + 6, x: x, y: y}
             } else {
-                return {rotation: rotation + 5}
+                return {rotation: rotation + 6}
             }
         }
         
@@ -69,7 +69,7 @@ class Spaceship extends React.Component {
             let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
             let y = state.y - Math.cos(-(state.rotation - 65)*Math.PI/180) * state.speed;
                 // let rotation = {rotation: rotation - 7}
-                return { x: x, y: y, rotation: rotation - 7}
+                return { x: x, y: y, rotation: rotation - 6}
             } else {
                 let x = state.x - Math.sin(-(state.rotation - 65)*Math.PI/180) * state.speed;
                 let y = state.y - Math.cos(-(state.rotation - 65)*Math.PI/180) * state.speed;
@@ -79,28 +79,28 @@ class Spaceship extends React.Component {
                 }
             }; 
         }
-//          can I import bullets class into spaceship and then create new bullets?
-        // if (keyValue.space) {
-        //     let x = state.x;
-        //     let y = state.y;
-        //     // create bullet at x,y
-        //     let newBullet = new Konva.Tween({
-        //         node: bullet,
-        //         duration: 5,
-        //         x: x,
-        //         y: y,
-        //         fill: 'red',
-        //         rotation: Math.PI * 180,
-        //         opacity: 1,
-        //         strokeWidth: 6,
-        //         scaleX: 1.5
-        //         });
+// //          can I import bullets class into spaceship and then create new bullets?
+//         if (keyValue.space) {
+//             let x = state.x;
+//             let y = state.y;
+//             // create bullet at x,y
+//             let newBullet = new Konva.Tween({
+//                 node: bullet,
+//                 duration: 5,
+//                 x: x,
+//                 y: y,
+//                 fill: 'red',
+//                 rotation: Math.PI * 180,
+//                 opacity: 1,
+//                 strokeWidth: 6,
+//                 scaleX: 1.5
+//                 });
 
-        //             // start tween after 2 seconds
-        //         setTimeout(function() {
-        //         newBullet.play();
-        //         }, 2000);
-        //     }
+//                     // start tween after 2 seconds
+//                 setTimeout(function() {
+//                 newBullet.play();
+//                 }, 2000);
+//             }
     }
     
         changeColor = () => {
@@ -133,6 +133,7 @@ class Spaceship extends React.Component {
         )
     }
 }
+
 
 
 
